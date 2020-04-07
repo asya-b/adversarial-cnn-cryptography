@@ -1,5 +1,6 @@
 # adversarial-cnn-cryptography
-A project for Physics 555
+A project for Physics 555 <br>
+Main contents are in project.py
 
 The aim of this course project is to reproduce some results from a paper entitled "Learning to Protect Communications with Adversarial Neural Cryptography" (Abadi & Andersen, 2016). The objective of this work is to ascertain whether neural networks can learn to communicate securely using secret keys. In other words, the question is: if neural networks A and B are given a secret key, can they use that key to send information from A to B without an intercepting neural network being able to decipher the message. 
 
