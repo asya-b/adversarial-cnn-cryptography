@@ -12,7 +12,7 @@ numpy
 matplotlib
 
 Resources I referenced:
-Abadi & Andersen 2016 - https://arxiv.org/pdf/1610.06918.pdf
+Abadi & Andersen 2016 - https://arxiv.org/pdf/1610.06918.pdf <\br>
 Custom Training Tutorial - https://www.tensorflow.org/tutorials/customization/custom_training
 Tensorflow Tutorial - https://adventuresinmachinelearning.com/python-tensorflow-tutorial/
 jkbestami CryptoNN - https://github.com/jkbestami/CryptoNN
