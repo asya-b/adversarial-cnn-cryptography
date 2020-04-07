@@ -164,7 +164,7 @@ def eLoss(aIn,eOut):
 aIn = tf.placeholder(tf.float32, shape=(BATCH_SIZE, TEXT_SIZE), name='plaintextMessage')
 key = tf.placeholder(tf.float32, shape=(BATCH_SIZE, KEY_SIZE), name='cipherKey')
 
-#generate our symmetric scenario
+#generate our scenario
 aOut = model('Alice', aIn, key)
 bOut  = model('Bob', aOut, key)
 eOut  = model('Eve', aOut)
@@ -175,17 +175,17 @@ eveLoss = eLoss(aIn,eOut)
 ## Compute Alice and Bob's loss
 bobLoss = abLoss(aIn,bOut,eveLoss)
 
-# Collect trainable tensors from a tensorflow graph, scope ensures they all
-# belong to the same model
-abVars =  tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope='Alice')+tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope='Bob') 
+# Collect trainable tensors
+aVars =  tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope='Alice') 
+bVars   =  tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope='Bob') 
 eVars   =  tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='Eve') 
 
 # Define Adam optimizer using parameters given in the paper
-optimiser = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE, beta1=0.9, epsilon=1e-08)
+optimizer = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE, beta1=0.9, epsilon=1e-08)
 
 #training
-trainEve  = optimiser.minimize(eveLoss, [eVars])
-trainBob  = optimiser.minimize(bobLoss, [abVars])
+trainEve  = optimizer.minimize(eveLoss, var_list=[eVars])
+trainBob  = optimizer.minimize(bobLoss, var_list=[aVars + bVars])
 
 # begin tensorflow session used to run process given above
 sess = tf.Session() 
